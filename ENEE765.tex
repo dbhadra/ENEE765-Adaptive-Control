@@ -1,0 +1,296 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{blindtext}
+\usepackage{graphicx}\usepackage{amsmath}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\hyphenation{optical net-works semi-conductor}
+
+%\graphicspath{{~/Library/Caches/Users/deepayanbhadra/Desktop/}}
+\graphicspath{ {\string~/Desktop/} }
+
+\begin{document}
+
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Consensus and stability analysis of decentralized systems}
+
+% make the title area
+\maketitle
+
+\IEEEpeerreviewmaketitle
+
+\begin{abstract}
+We present two frameworks in which adaptive control has been extensively applied - consensus seeking network of agents and complex systems with interconnections. Consensus is studied using both the ubiquitous linear and the more recent nonlinear protocols. We also observe how fusing data from multiple agents ultimately leads to correct consensus and how consensus is also maintained in a nearest neighbor framework. Thereafter, we move onto a decentralized setting and consider how stability of decentralized systems can be hampered by the standard adaptive laws. It is seen that suitable controller modifications can counteract unwarranted behavior. 
+\end{abstract}
+
+
+
+\section{Introduction}
+
+With the advent of modern control techniques and computational power, more data is being exchanged and processed than ever before. Network of agents can work together under numerous settings, be it a flock of birds or a cluster of unmanned aerial vehicles (UAVs). Consensus is a situation when multiple agents interacting with each other agree on a state value. The idea is to propose a design update so that vehicles in the network converge to this value. There is a common pre-assigned objective which the agents need to satisfy. Consider the single integrator dynamics with time-varying gain [1], \begin{equation} \dot{x}_i = g_i(t)u_i \end{equation} 
+where $g_i(t)$ is  a scalar time varying signal and satisfies the
+Persistence of Excitation (PE) condition. We
+consider diverse inter-agent communication topology by using $g_i(t)$
+as the time-varying weight associated with edge $e_i$. A Lyapunov-based method is analyzed for the consensus problem to arrive at a rate of convergence. When the agents are actual physical models, there are restrictions on applicable inputs, which leads to nonlinear formulations. \\ From an alternate perspective, most large-scale systems are composed of smaller subsystems, with possibly unknown parameters, that may make local decisions without knowledge of the complete system. When interconnections exist, they may impact the system stability and we study decentralized adaptive laws that are robust to uncertainties. 
+
+\section{Preliminaries}
+
+An undirected graph $\mathcal{G}$ is a pair $(\mathcal{V}, \mathcal{E})$ where $\mathcal{V}$ is a finite non empty
+node set (agents) and $\mathcal{E}$ is an edge set. $(i; j) \in \mathcal{E}$ is an undirected
+edge if agents $v_i$ and $v_j$ exchange information with each other. A
+graph is connected, if for every pair of vertices in $V(\mathcal{G})$, there is a
+path that has them as its end vertices. $D(\mathcal{G}^o)$ is the incidence matrix of a graph $\mathcal{G}$ with arbitrary orientation $\mathcal{O}$, concisely put as $\mathcal{G}^o$. The  incidence matrix has a row and a column for each vertex and edge respectively and $(v,e)$ is 1 $iff$ vertex $v$ is incident upon edge $e$. $A$ is the adjacency matrix wherein the elements denote if the pair of vertices are joined by a graph edge or not. The graph Laplacian matrix of an arbitrarily oriented graph $\mathcal{G}^o$ is defined as  \begin{equation} L(\mathcal{G}^o) = D(\mathcal{G}^o)WD(\mathcal{G}^o)^T   \end{equation}where $W \in R^{mxm}$ is the diagonal matrix with the weights
+$w(e_i)$, i = {1,2,...m}  on the diagonal entry. Thus $W = diag(w(e_i))$. Similarly, the edge Laplacian matrix $L_e$ of an arbritarily oriented graph $\mathcal{G}^o$ is defined as  \begin{equation}L_e(\mathcal{G}^o) = D(\mathcal{G}^o)^TD(\mathcal{G}^o) \end{equation} The signal $g(\tau)$ is Persistently Exciting (PE) [6] if there exist finite positive constants $\mu_1, \mu_2, t_1$ such that  \begin{equation}  \mu_2I_n \geq \int_{t}^{t+t_1} g(\tau)g(\tau)^Td\tau \geq \mu_1I_n \qquad \forall t \geq 0 \end{equation}
+
+The linear time-varying system $[A(t),C(t)]$ defined by, $$ \dot{x}(t) = A(t)x(t) \quad x(0) = x_0$$ \begin{equation}y(t) = C(t)x(t) \end{equation} is called uniformly completely observable (UCO) if there exist finite and strictly positive constants $\beta_1,\beta_2, \delta $ such that $$ \beta_2I_n \geq \int_{t_0}^{t_0+\delta} \phi_A^T(\tau,t_0)C^T(\tau)C(\tau)\phi_A^T(\tau,t_0)d\tau \geq \beta_1I_n \qquad \forall t_0 \geq 0$$ where $\phi_A(\tau,t_0)$ is the state exponential matrix. An interconnection of $N$ subsystems can be represented as [9]: $$ \dot{x}_i = A_ix_i+b_iu_i+\sum_{j=1}^{N}f_{ij}(t,x_j)$$\begin{align} y_i = h^T_ix_i \quad i=1,....,N \end{align}, where $f_{ij} \in \mathbb{R}^{n_i}$ contains the nonlinearities of the $i^{th}$ subsystems and its nonlinear interactions with other subsystems. The parameters $A_i,b_i,h_i$ are unknown constant matrices and $f_{ij}$ satisfy $||f_{ij}|| \leq a_{ij}||x_j||. $
+
+\section{Consensus Analysis}
+
+The single integrator dynamics for a class of multi-agent system
+is defined as \begin{align}\dot{x}_i = u_i\end{align}
+
+with a feedback law of the following form [2], \begin{align} u_i = -k\sum_{j=1}^{n} a_{ij}(t)(x_i-x_j) \qquad i = 1,2,...n;\quad k \in R^+ \end{align} $a_{ij}(t)$ being the $(i,j)^{th}$ entry of the adjacency matrix $A$ associated with graph $\mathcal{G}$ at time $t$, which shows intuitively that the information state of each vehicle $x_i$ is driven toward the information states of its neighbors $x_j$.\\\\
+Now if we recall the definition of the Laplacian matrix $L(\mathcal{G})$, this can be concisely written as \begin{align} u(t) = -kL(\mathcal{G})x = -kD(\mathcal{G})W(t)D(\mathcal{G})^Tx \end{align}
+
+where $W(t) = diag(g_i^2(t)), i = {1,2,...m}$, with $g_i^2(t)$ representing the edge weights at time $t$.
+\\\\
+For any graph, we have a spanning tree which includes all of the vertices, with minimum possible number of edges. Adding a edge will create a cycle. An example is given below: 
+\begin{figure}[h]
+\centering{ \includegraphics{25spanning.jpg}}
+\caption{Original graph}
+\end{figure}
+
+\begin{figure}[h]
+\centering{ \includegraphics{26spanning.jpg}}
+\caption{Spanning  Trees}
+\end{figure}
+We can subdivide $W(t)$ as $diag[W_{tree}(t), W_{cyc}(t)]$, where the first term represents the weights for the spanning tree edges and the latter for the cycle edges.\\\\ Theorem [1] : The proposed continuous update law guarantees that the class of multi-agent systems with single integrator dynamics and time-varying communication topology characterized by $W(t)$ achieves consensus exponentially if $W_{tree}(t)$ is Persistently Exciting. \\\\ Zelazo and Mesbahi[3] has shown that focusing on the edge agreement offers significant benefits over the traditional node agreement.  In consensus problems, the exchange of information happens between neighboring agents. This has a natural interpretation in terms of the edges in the interconnection graph, and a corresponding dynamic description of the consensus protocol can be written from the edge perspective. After that, we employ a Lyapunov function to show exponential consensus. \\\\Proof [1]: We define the edge states as \begin{equation}x_e = D(\mathcal{G})^Tx\end{equation} This naturally conveys how the nodes are linked via the edges. Using $u(t)$ and the definition of edge laplacian matrix, this leads us to \begin{equation}\dot{x_e} = D(\mathcal{G})^T\dot{x} = -kL_e(\mathcal{G})W(t)x_e \end{equation}From Fig.1 and 2, any connected graph can be described as  $\mathcal{G} = \mathcal{G}_{tree} \cup \mathcal{G}_{cyc} $. Similarly, \begin{equation} D(\mathcal{G}) = [D(\mathcal{G}_{tree}) \quad D(\mathcal{G}_{cyc})] \end{equation}Thus, \begin{equation}L_e(\mathcal{G}) = [D(\mathcal{G}_{tree}) \quad D(\mathcal{G}_{cyc})]^T[D(\mathcal{G}_{tree}) \quad D(\mathcal{G}_{cyc})] \end{equation}
+
+$ \qquad = \begin{bmatrix}
+L_e(\mathcal{G}_{tree}) &  D(\mathcal{G}_{tree})^TD(\mathcal{G}_{cyc}) \\
+D(\mathcal{G}_{cyc})^TD(\mathcal{G}_{tree}) & L_e(\mathcal{G}_{cyc})
+\end{bmatrix}$
+\\\\
+The columns of the cycle edges $D(\mathcal{G}_{cyc})$ are linearly dependent on the columns of $D(\mathcal{G}_{tree})$. This can be expressed: \begin{align} D(\mathcal{G}_{tree})M = D(\mathcal{G}_{cyc})\end{align} where the matrix $M$ is defined as $\big(D(\mathcal{G}_{tree})^TD(\mathcal{G}_{tree})\big)^{-1}D(\mathcal{G}_{tree})^TD(\mathcal{G}_{cyc})$
+We can also partition the edge vector as: $$ x_e = \begin{bmatrix}
+x_{tree} \\ x_{cyc} 
+\end{bmatrix} $$ Substituting (8), (9) into (7) and noting that \begin{equation} x_{cyc}(t) = M^Tx_{tree}(t)\end{equation} we get $$\dot{x}_{tree} = -kL_e(\mathcal{G}_{tree})W_{tree}(t)x_{tree} - kD(\mathcal{G}_{tree})^TD(\mathcal{G}_{cyc})W_{cyc}(t)x_{cyc}$$\begin{equation}= -kL_e(\mathcal{G}_{tree})RW(t)R^Tx_{tree}, \quad R = [I \quad M]\end{equation} $L_e(\mathcal{G}_{tree})$ is symmetric and positive definite and hence can be written as $L_e(\mathcal{G}_{tree}) = \Gamma\Lambda\Gamma^T$ \\Using modified states, $y = \Gamma^Tx_{tree}$, the dynamics become \begin{equation}\dot{y} = -k\Lambda\Gamma^TRW(t)R^T\Gamma y\end{equation}
+To prove exponential convergence, a Lyapunov-like function is defined \begin{equation}V(y) = y^T\Lambda^{-1}y\end{equation} Hence, \begin{equation}\dot{V}(y) = -2ky^T(\Gamma^TRW(t)R^T\Gamma)y \end{equation} Now since $W(t)$ is PE, it can also be verified that $\Gamma^TRW(t)R^T\Gamma$ is also PE. This proves that $\dot{V}(y)$ is negative definite and thus Lyapunov-like stability is confirmed. 
+
+\subsection{Consensus with Linear Protocols}
+
+Here we demonstrate the update law and validate consensus for different information-exchange topologies. Firstly, we consider single integrator dynamics: $$\dot{x}_i = u_i$$\begin{align}\dot{y}_i = v_i\end{align},where $(x_i,y_i)$ are the coordinates of agent $i$. 
+\begin{figure}[h]
+\centering{ \includegraphics{Agents4.jpg}}
+\caption{Information-exchange topology between four agents [1]}
+\end{figure}
+Here, $W(t) = diag[g_1^2(t),g_2^2(t),g_3^2(t),g_4^2(t),g_5^2(t)]$ where $g_i^2(t) = (t^2+1)^2sin^2(it)$ for $i = \{1,...5\}$ The weight matrix signifies dynamic changes in the inter-agent communication. \\\\\\
+Also, $ D(\mathcal{G})\quad = \begin{bmatrix}
+1&0&0&0&1\\-1&1&0&-1&0\\0&-1&1&0&-1\\0&0&-1&1&0
+\end{bmatrix}$ \\\\\\
+Using the control law with control gain k = 1, the plot in Fig.4 shows how consensus is achieved smoothly from the initial positions. \\ The Laplacian potential of a graph [4] is defined as:\begin{align} \Psi_\mathcal{G}(x) = \frac{1}{2}x^TLx\end{align}
+For our case, a straightforward computation  results in \begin{align}x^TLx = \sum_{ij} g_i^2(t)(x_i-x_j)^2 \end{align}
+Hence, the Laplacian potential can be interpreted as a measure of total disagreement among the nodes and reaching consensus is equivalent to this being minimized.  
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.4]{Plot1.jpg}}
+\caption{State trajectories of the 4 agents showing consensus at (0.4425,1.045)}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot13.jpg}}
+\caption{Laplacian Potential (4-agent/single-integrator model)}
+\end{figure}
+\\\\
+ Double integrator dynamics are used to model more naturally occurring agents like coaxial rotorcraft MAVs. With this, the same topology  in Fig.3 yields consensus under identical conditions as shown in Fig.6. It is interesting to note that there is no major difference in the trajectory evolution.
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot2.jpg}}
+\caption{State trajectories of the 4 agents showing consensus at (0.4425,1.045)}
+\end{figure}
+\\\\
+Now we consider a different topology as shown in Fig.7. 
+\begin{figure}[h]
+\centering{ \includegraphics{Agent3.jpg}}
+\caption{Information-exchange topology between three agents [5]}
+\end{figure}\\
+Again, $W(t) = diag[g_1^2(t),g_2^2(t),g_3^2(t)]$ with the same $g_i^2(t)$ as above.  \\\\Now, $ D(\mathcal{G})\quad = \begin{bmatrix}
+-1&0&1\\1&-1&0\\0&1&-1
+\end{bmatrix}$ \\\\
+Using the control law with control gain k = 1, Fig.8 shows how consensus is achieved smoothly from the initial positions, for the single integrator model. 
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot3.jpg}}
+\caption{State trajectories of the 3 agents showing consensus at (0.4,1.467)}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot14.jpg}}
+\caption{Laplacian Potential (3-agent/single-integrator model)}
+\end{figure}
+As observed already in the 4-agent case, there is no appreciable difference with a double integrator model as shown in Fig. 10.
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot4.jpg}}
+\caption{State trajectories of the 3 agents showing consensus at (0.4,1.467)}
+\end{figure}\\\\
+The final topology we consider is a 6-agent (single integrator model) as shown in Fig. 9. The analysis follows the same route but is more computationally involved. The consensus result is shown in Fig. 12. \\\\\\
+$ D(\mathcal{G})\quad = \begin{bmatrix}
+-1&0&0&0&-1&0&0&0&1\\1&-1&0&0&0&0&0&0&-1\\0&0&0&1&1&-1&0&0&0\\0&1&-1&0&0&0&0&1&0\\0&0&1&-1&0&1&-1&0&0\\0&0&0&0&0&0&1&-1&0
+\end{bmatrix}$ \\
+\begin{figure}[h]
+\centering{ \includegraphics[scale = 0.85]{Agent6.jpg}}
+\caption{Information-exchange topology between six agents}
+\end{figure}\\
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot5.jpg}}
+\caption{State trajectories of the 6 agents showing consensus at (0.95,1.4)}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot15.jpg}}
+\caption{Laplacian Potential (6-agent/single-integrator model)}
+\end{figure}
+
+\subsection{Consensus with Nonlinear Protocols}
+Our focus so far has been on linear dynamics among the agents. We move a step ahead to demonstrate that consensus holds for nonlinear interactions as well, under some restrictions.  Now each node is modeled as: \begin{align} \dot{x}_i = \sum_{j\in N_i} \phi_{ij}(x_j-x_i), \quad \forall i\in\mathcal{I}\end{align} where $N_i = \{j\in \mathcal{I}\}$ is the set of neighbors of node $i$ and $\phi$ is a continuous, locally lipschitz, strictly increasing odd function, with $\phi(0) = 0$. 
+\\\\
+Theorem [4]: Assuming that $(V,E)$ is a connected graph and symmetric edge actions $\phi_{ij} = \phi_{ji}$, an average consensus $x^* = \bar{x}(0)$ is reached globally asymptotically by every node. 
+\\\\
+Proof: Let $\alpha = \bar{x}$ and since $\sum_{i=1}^{n}u_i = 0 \implies \dot{\alpha} = 0, \alpha(t) = \bar{x}(0), \quad \forall t \geq 0$ Let $x = \alpha\textbf{1} + \delta$, where $\delta$ is called the disagreement vector. Also note that $\sum_{i}\delta_i = 0, \dot{x} = \dot{\delta}$ Thus it follows that $$\dot{\delta}_i = \sum_{j\in N_i} \phi_{ij}(\delta_j-\delta_i), \quad i = 1,...,n$$ Defining a Lyapunov-like function $$V(\delta) = \delta^T\delta$$ we get $$\dot{V}(\delta) = -\sum_{(i,j)}(\delta_j-\delta_i)\phi_{ij}(\delta_j-\delta_i) \leq 0 $$ Since the graph is connected, $\delta_i = \delta_j,  \forall i,j \in \mathcal{I}$ Hence, if $\delta \neq 0$, then $\dot{V}(\delta) < 0$ and $\delta = 0$ is asymptotically stable. Thus $x(t) \rightarrow \alpha\textbf{1}$, establishing average consensus. \\\\
+We demonstrate nonlinear consensus for one topology (Fig. 7) with single integrator dynamics. \\Case 1: Consider $$\phi (x) = \alpha x(t) + sin(x(t))$$  Let $\alpha = 2$ and hence $\dot{\phi} \geq 1$. 
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot6.jpg}}
+\caption{State trajectories of the 3 agents showing consensus at (0.4,1.467)}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot7.jpg}}
+\caption{x-y trajectories of the 3 agents showing asymptotic average consensus}
+\end{figure}
+\\\\Case 2: Consider a piece-wise nonlinear function as follows:
+\[ \phi(x) = \begin{cases} 
+     x^2  \quad & x > 1 \\
+      \sqrt{x} \quad &  0 < x \leq 1 \\
+   -\sqrt{-x} \quad & -1 < x \leq 0 \\
+   -x^2	\quad & x \leq -1
+   \end{cases}\]  
+The results are shown in Fig. 14, 15 and 16, 17 for Case 1 and 2 respectively.
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot20.jpg}}
+\caption{State trajectories of the 3 agents showing consensus} \end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot21.jpg}}
+\caption{x-y trajectories of the 3 agents showing asymptotic average consensus} \end{figure}
+\\\\We also consider changing the value of the gain k and observing how it affects the time to consensus. It is reasonable to expect that increasing k would speed up convergence but this does not hold arbitrarily as can be seen from (24) since $k$ appears both in the numerator and denominator of the log function. \\\\Theorem:[6] Let $B_h$ be a closed ball of radius $h$ centered at 0 in $R^n$. If there exists V(t,x) and $\alpha_1,\alpha_2,\alpha_3,\delta > 0$ such that $\forall x \in B_h, t\geq 0$, the following holds $$\alpha_1||x||^2 \leq V(t,x) \leq \alpha_2||x||^2$$$$\frac{dV(t,x(t)}{dt} \leq 0$$$$\int_{t}^{t+\delta}\frac{dV(\tau,x(\tau)}{d\tau}d\tau \leq -\alpha_3||x(t)||^2$$ then $x(t)$ converges exponentially to 0. Further, the Anderson convergence rate is given as:$$\frac{\alpha_v}{2} = \frac{1}{T}\ln\frac{1}{1-\frac{\alpha_3}{\alpha_2}}$$
+
+For our problem, the derivation in [5] yields \begin{align}\frac{\alpha_v}{2} = \frac{1}{2T}\ln\frac{1}{\Big[1-\frac{2k\lambda_{min}(\Lambda)\mu_1}{(1+k\sqrt{p}||\Lambda||\mu_2)^2}\Big]}\end{align} As another alternative, the convergence rate estimate based on Brockett[7] for the multi-agent case yields\begin{align}\frac{\mathcal{K}}{2} = \frac{1}{2T}\ln\Big\{1-\frac{\Omega^2}{\lambda_{max}(\Lambda^{-1})}\Big\}\end{align}, where $$\Omega = -a+\sqrt{b+a^2}$$$$ a = \frac{(p\mu_2)^{1.5}\lambda_{max}(\Lambda)}{1+2\mu_1\lambda_{min}(\Lambda)}$$$$b = \frac{2\mu_1\lambda_{min}(\Lambda)}{\lambda_{max}(\Lambda)(1+2\mu_1\lambda_{min}(\Lambda))}$$, where $p$ is the number of spanning tree edges. A detailed derivation is available in [5]. Comparison of the two estimates gives \begin{align}\frac{\mathcal{K}}{2} = -\frac{\alpha_v}{2}+\frac{1}{2T}\ln\{J(p,\mu_1,\mu_2)\}\end{align} where $J(p,\mu_1,\mu_2) = \frac{1-\Big\{\frac{\Omega^2}{\lambda_{max}(\Lambda^{-1})}\Big\}}{\{1-\eta^2\}}$ and $\eta^2 = \frac{\mu_1}{(1+\sqrt{n}\mu_2)^2}$ 
+\\\\
+Hence the Anderson estimate is tighter compared to the Brockett estimate as shown in Fig. 18.
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot16.jpg}}
+\caption{$J(p,u_1,u_2) $ for p = 2 and select values of $u_2$} \end{figure}
+\subsection{Consensus Filters with Sensor Fusion}
+Consider the case of a signal $r(t)$ being measured by every sensor/node in a network/graph in a noisy environment. The idea is to track the average of all the measurements using an average consensus based distributed low-pass filter, termed as 'consensus filter' [8]. Hence each sensor receives\begin{align} u_i(t) = r(t)+v_i(t)\quad i=1,...,n\end{align} where $v_i$ is a zero-mean white Gaussian noise (WGN). We want to design the aforementioned filter with state $x = (x_1,....,x_n)^T \in \mathcal{R}^n$ that takes $u$ as the input and produces $y = x$ such that all nodes reach an $\epsilon$-consensus regarding the value of $r(t)$.\\ A choice for the consensus filter dynamics is given as: \begin{align} \dot{x}_i(t) = \sum_{j\in \mathcal{N}_i} a_{ij}(x_j(t)-x_i(t)) + \sum_{j \in \mathcal{J}_i} a_{ij}(u_j(t)-x_i(t)) \end{align} where $\mathcal{N}_i$ is the set of neighbors of node $i$ and $\mathcal{J}_i = \mathcal{N}_i \cup i$ 
+We can consolidate the network dynamics neatly as \begin{align} \dot{x} = -(I_n+ \Delta + L)x + (I_n+\mathcal{A})u\end{align}, where $\mathcal{A} = -(I+ \Delta + L)$ This can be seen from: $$ \dot{x}_i = \sum_{j\in \mathcal{N}_i} a_{ij}(x_j-x_i) + \sum_{j \in \mathcal{J}_i} a_{ij}(u_j-u_i+u_i-x_i),$$ $$= \sum_{j\in \mathcal{N}_i} a_{ij}(x_j-x_i) + \sum_{j \in \mathcal{J}_i} a_{ij}(u_j-u_i) + |J_i|(u_i-x_i).$$ From the definition of graph Laplacian, $|J_i| = 1+d_i$ and $\Delta - L = \mathcal{A}$. Hence, $$\dot{x} = -Lx-Lu+(I_n+\Delta)(u-x),$$$$=-(I_n+\Delta+L)x+(I_n+\Delta-L)u$$ which validates the collective form.\\\\
+Proposition [8] : With the reference signal $r(t)$ satisfying $|\dot{r}| \leq \nu$, the mean of the state of all nodes is the output of a scalar low-pass filter \begin{align} \dot{\mu} = (k+1)(\bar{u}(t)-\mu)\end{align}, with $\bar{u}(t) = r(t)+w(t)$, $k$ being the network degree and $w(t) = \frac{1}{n}\sum_{i}v_i(t)$, being the zero mean noise.\\ Proof: This follows from, $$ \mu = \frac{1}{n}(\textbf{1}^Tx);\quad \textbf{1}^TL = 0;\quad  I_n+\Delta = (k+1)I_n$$ which is true because every Laplacian matrix $L$ has a zero eigenvalue corresponding to $\textbf{1}^T$ eigenvector and $\Delta$ is the degree matrix of $\mathcal{G}$. Note that (29) can also be written as $$ \dot{x} = -Lx-Lu+(I_n+\Delta)(u-x)$$Thus multiplying each side by $\textbf{1}^T$ and dividing by n, the proposition follows. \\\\ Let us illustrate the benefits of this sensor fusion using a sample network with 100 nodes and degree k = 6 at each node. Imagine we wish to track the signal $r_1(t) = sin(2t)$. This could possibly represent $x$-coordinate of a moving object. The covariance matrix is set to $R_i$ = 0.3 for all nodes. As seen in Fig. 19, there is a significant noise reduction due to the data fusion. 
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot17.jpg}}
+\caption{Effect of sensor fusion via the consensus filter} \end{figure}
+
+\subsection{Consensus with Nearest Neighbor Rules}
+In this case, the path of each agent is shaped by the average of its own coordinates plus that of its neighbors, which are either on or inside a circle of pre-specified radius. An interesting aspect is that, despite the lack of centralized coordination and continual changes in the neighbors of an agent, they eventually move in the same direction.  Hence, the dynamics of each agent follows: \begin{align} \theta_i(t+1) = \frac{1}{1+n_i(t)}\Big(\theta_i(t) + \sum_{j\in \mathcal{N}_i(t)}\theta_j(t) \Big) \end{align},where $n_i(t)$ is the number of neighbors of agent $i$ at time $t$, $\mathcal{N}_i(t)$ the set of agents which are neighbors of agent $i$ at time $t$ and $\theta_i(t)$ the heading of the agent at time $t$. This can be concisely summed as: \begin{align} \theta(t+1) = (I+D_p)^{-1}(A_p+I)\theta(t),\quad t \in \{0,1,2...\} \end{align}, where $D_p$ is the diagonal degree matrix, $A_p$ is the adjacency matrix and $p$ signifies that the network, as in the graph, is continually changing. \\\\We consider the three agent topology in Fig.7 with unweighted edges and demonstrate consensus as shown in Fig. 20. 
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot24.jpg}}
+\caption{Trajectories showing consensus in unweighted 3-agent topology using nearest neighbor rule}
+ \end{figure}
+
+\section{Decentralized Adaptive Control for Interconnected Systems}
+
+When we work with complex large-scale systems, the assumption of centrality of information no longer holds true. Consider a motivating system below[9]: $$\dot{x}_1 = a_1x_1+u_1+a_{12}x_2$$\begin{align}\dot{x}_2=a_2x_2+u_2\end{align}where the interconnection matrix $H = [0 \quad a_{12};0\quad 0], a_1,a_2,a_{12}$ are unknown constants. We want to design $u_1,u_2$ so that $x_1,x_2$ track $x_{m1},x_{m2}$ of the local reference models  \begin{align}\dot{x}_{mi} = -x_{mi}+r_i \quad i=1,2\end{align} Suppose $H$ = 0, then we have two isolated subsystems and we design an adaptive controller $$u_i = -K_i(t)x_i+r_i$$\begin{align}\dot{K}_i = \gamma_ie_i(e_i+x_{mi})\quad i=1,2\end{align} If we apply this controller to the interconnected system, the closed loop dynamics is described by: $$ \dot{e_1}=(a_1-K_1)e_1-(K_1-a_1-1){x_m}_1+a_{12}(e_2+{x_m}_2)$$ \begin{align}\dot{e_2}=(a_2-K_2)e_2-(K_2-a_2-1){x_m}_2\end{align}where $e_i=x_i-{x_m}_i$ is the tracking error. Simulating the above with $r_1=1,r_2=4,a_1=-2,a_2=-1.5,a_{12}=-0.5$ shows that $K_1(t)$ diverges, which occurs due to the interaction term $a_{12}{x_m}_2$ entering $e_1$ as a bounded disturbance. \\\\ This can be explained as follows: We compute the equilibrium point of the overall system and obtain: $$x^*_{m1} = r_1, e^*_1=0, K^*_1 = 1+a_1+a_{12}\frac{r_2}{r_1}$$$$x^*_{m2} = r_2, e^*_2=0, K^*_2 = 1+a_2$$ Linearizing the system about this equilibrium point yields the Jacobian matrix as: \\\\ $ \qquad J = \begin{bmatrix}
+-1-a_{12}\frac{r_2}{r_1} & a_{12} & -a_{12}\frac{r_2}{r_1}  & a_{12} &0 &0 \\
+0 &-1&0&0&0&-r_2\\ 0&0&-1&0&0&0 \\ 0&0&0&-1&0&0\\ \gamma_1 r_1 &0&0&0&0&0 \\ 0&\gamma_2 r_2 &0&0&0&0 
+
+\end{bmatrix}$
+\\\\
+Computing the eigenvalues gives: $$ \lambda = -1,-1,0,$$$$-0.5+\sqrt{-\gamma_2 r^2_2+0.5}, -0.5-\sqrt{-\gamma_2 r^2_2+0.5}, -\frac{r_1+a_{12}r_2}{r_1}$$We can always choose $\gamma_1 , \gamma_2$ so that those eigenvalues are stable. However, since $a_{12}$ is an unknown constant, if $a_{12}\frac{r_2}{r_1} < -1$ then the equilibrium is unstable. The same is reflected in the values chosen above and shown in Fig. 21. Even though the error remains bounded, $K_1(t)$ drifts to infinity
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot9.jpg}}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot10.jpg}}
+\caption{Parameter drift due to unmodeled interconnections}
+\end{figure}
+\\\\
+The remedy is to design new decentralized controllers with a modified adaptive law as proposed below: $$\dot{K_i} = -\sigma_i K_i + \gamma_i e_i(e_i+x_{m_i}),\quad i=1,2$$  \[ \sigma_i = \begin{cases} 
+      \sigma_{oi} \quad & |K_i| > K_{oi} \\
+      0 \quad & |K_i| \leq K_{oi}\\
+   \end{cases}
+\] 
+The outcome of this change on the dynamics, with $\sigma_{o1} = 0.05, \sigma_{o1} = 0.01, K_{o1} = 1.5,  K_{o2} = 1 $ is shown in Fig. 22. 
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot11.jpg}}
+\end{figure}
+\begin{figure}[h]
+\centering{ \includegraphics [scale = 0.45]{Plot12.jpg}}
+\caption{Parameter drift stabilization with modified adaptation}
+\end{figure}
+\\Consider now an intricate third-order interconnected system\\\\
+$ \qquad \dot{x}_1 = \begin{bmatrix}
+0&1 \\1&-2 \\
+\end{bmatrix}x_1 + \begin{bmatrix}
+0\\1\\
+\end{bmatrix}u_1+\begin{bmatrix}
+0.1\\0\\
+\end{bmatrix}x_2+\begin{bmatrix}
+0\\0.2\\
+\end{bmatrix}x_2sin(y^2_1)$
+\begin{align}y_1 = [1\quad 0]x_1 \end{align}$$\dot{x}_2=-x_2+u_2+0.02x_{12}cosx^2_2+1.1x_2cos2t$$\begin{align}y_2=x_2 \end{align} where $x_1 = [x_{11}, x_{12}]^T$. It is desired to design $u_1,u_2$ so that $y_1,y_2$ track the reference outputs $y_{m_1},y_{m_2}$$$y_{m_1}(s) = \frac{1}{s^2+3s+2}r_1(s), \quad y_{m_2}(s) = \frac{1}{s+5}r_2(s) $$ For subsystem (37), we use the local adaptive controller as: $$v_1 = \frac{1}{s+1}u_1, v_2=\frac{1}{s+1}y_1$$ $$\xi_1 = \frac{1}{s+0.5}v_1, \xi_2 = \frac{1}{s+0.5}v_2$$ $$\xi_3 = \frac{1}{s+0.5}y_1$$
+\begin{align}u_1 = K_{11}v_1+K_{12}v_2+K_{13}y_1+\dot{K}_{11}\xi_1 + \dot{K}_{12}\xi_2+\dot{K}_{13}\xi_3+r_1\end{align}$$\dot{K}_{11} = -5e_{01}\xi_1-\sigma_15(1+||\xi||^2)K_{11}$$$$\dot{K}_{12} = -5e_{01}\xi_2-\sigma_15(1+||\xi||^2)K_{12}$$$$\dot{K}_{13} = -5e_{01}\xi_3-\sigma_15(1+||\xi||^2)K_{13}$$
+\[ \sigma_1 = \begin{cases} 
+      1.5 \quad & ||K_1|| \geq K_{01} \\
+      0 \quad &  ||K_1|| < K_{02} \\
+   \end{cases}
+\] 
+where $||\xi||^2 = \xi^2_1+\xi^2_2+\xi^2_3, K_1 = [K_{11},K_{12},K_{13}]^T, e_{01} = y_1-y_{m_1}$and $W_{m_1}(s) = \frac{1}{s^2+3s+2}$ is SPR (strictly positive real).\\\\
+For subsystem (38), we use 
+\begin{align}u_2 = K_{21}x_2+r_2, \dot{K}_{21} = -4\sigma_2K_{21}-4e_{02}x_2\end{align}
+\[ \sigma_2 = \begin{cases} 
+      0.4 \quad & |K_2| \geq K_{02} \\
+      0 \quad &  |K_2| < K_{01} \\
+   \end{cases}
+\] 
+where $e_{02}=y_2-y_{m_2}$. As can be seen from Fig. 23, all the responses remain bounded though it's unclear why $e_2$ converges and is currently being checked. 
+
+\section{Conclusion}
+
+We studied the consensus problem for different topologies and protocols for both the single and double integrator models. The Laplacian potential was also used as a measure towards consensus. The convergence rate estimates using two existing approaches was compared. We also observed the decentralized  behavior of an interconnected system and verified modified adaptive laws for stability. Research has been ongoing in networks with communication delays between the agents and this is currently under investigation. 
+
+\section{References}
+
+[1] Roy Chowdhury,N. and Srikant,S (2014). Persistence based analysis of consensus protocols for dynamic graph networks.In European Control Conference (ECC),2014, 886–891 \break
+ 
+[2] W. Ren and R. W. Beard, Distributed consensus in multi-vehicle cooperative control: theory and applications. Springer verlag London Limited, 2008. \break
+
+[3] D. Zelazo and M. Mesbahi, “Edge agreement: Graph-theoretic performance bounds and passivity analysis,” IEEE Transactions on Automatic Control, vol. 56, no. 3, pp. 544–555, 2011. \break
+
+[4] R. Olfati-Saber, and R. M. Murray, “Consensus protocols for networks of dynamic agents,” in Proc. 2003 Am. Control Conf., 2003, pp. 951-956.\break
+
+[5] Chowdhury, N.R., and Sukumar, S. (2015). A comparative study of persistence based convergence rate estimates to consensus. In Proceedings of the 1st conference on Modelling, Identification and Control of Nonlinear Systems (pp. 53–539). Saint-Petersburg: IFAC. \break
+
+[6] S. Sastry and M. Bodson, Adaptive control: stability, convergence
+and robustness. Courier Dover Publications, 2011. \break
+
+[7] Brockett,R (2000).The rate of descent for degenerate gradient flows. In Proceedings of the MTNS. \break
+
+[8] R. Olfati-Saber and J. S. Shamma, “Consensus filters for
+sensor networks and distributed sensor fusion,” in 44th IEEE
+Conference on, Decision and Control, European Control Conference.
+CDC-ECC’05. 2005. IEEE, 2005, pp. 6698–6703. \break
+
+[9] P. A. Ioannou, “Decentralized adaptive control of interconnected
+systems,” IEEE Trans. Automatic Control vol. AC-31. pp. 291-298.
+Apr. 1986 \break
+
+[10] Gavel, D. T.,  Siljak, D. D. (1989). Decentralized adaptive control: Structural conditions for stability. IEEE Transactions on Automatic Control, 34(4), 413–426. \break
+
+[11] A. Jadbabaie, J. Lin, and A. S. Morse, "Coordination of groups of mobile autonomous agents using nearest neighbor rules, " Automatic Control, IEEE Transactions on, vol. 48, no. 6, pp. 988-1001, 2003 \break
+
+
+
+% that's all folks
+\end{document}
+
+
