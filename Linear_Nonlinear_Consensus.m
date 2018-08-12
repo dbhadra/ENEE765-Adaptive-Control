@@ -1,6 +1,3 @@
-% This contains different kinds of topologies with single/double integrator
-% models with linear and nonlinear protocols
-
 clc;clear;
 k = 1;
 D = [1 0 0 0 1;-1 1 0 -1 0;0 -1 1 0 -1;0 0 -1 1 0];
