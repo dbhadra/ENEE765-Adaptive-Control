@@ -1,6 +1,3 @@
-% Compares the Anderson and Brockett convergence estimates for a 3-agent
-% topology. 
-
 clc;clear;
 D = [-1 0 1;0 1 -1;1 -1 0];
 Le = D'*D;
