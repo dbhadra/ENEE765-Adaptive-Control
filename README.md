@@ -6,7 +6,7 @@ Linear_Nonlinear_Consensus.m - Contains different kinds of topologies with singl
 
 Sensor_Fusion_Consensus.m - Demonstrates how fusing data from multiple agents ultimately leads to correct consensus. Refer pages 6-7 in the PDF
 
-Nearest_Neighbor_Consensus.m - Dhows how, despite the lack of centralized coordination and continual changes in the neighbors of an agent, they eventually move in the same direction. Refer page 7 in the PDF
+Nearest_Neighbor_Consensus.m - Shows how, despite the lack of centralized coordination and continual changes in the neighbors of an agent, they eventually move in the same direction. Refer page 7 in the PDF
 
 Anderson_Brockett_estimates.m - Compares the Anderson and Brockett convergence estimates for a 3-agent topology. Refer pages 5-6 in the PDF
 
