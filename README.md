@@ -14,5 +14,7 @@ Decentralized.m - Analyzes decentralized adaptive laws that are robust to uncert
 
 vdp1.m - Defines the model used in the nonlinear protocol consensus problem. 
 
+myode.m - Interpolates data for the sensor fusion consensus problem
+
 
 
