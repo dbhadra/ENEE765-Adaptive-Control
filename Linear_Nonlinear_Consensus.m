@@ -52,13 +52,12 @@ figure(1)
 plot(x(:,1),y(:,1),'b')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
-hold on;
 plot(x(:,4),y(:,4),'k')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3','Agent 4')
+hold off;
 
 pause(15)
 
@@ -97,11 +96,11 @@ figure(1)
 plot(x(:,1),y(:,1),'k')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3')
+hold off;
 
 pause(15)
 
@@ -140,8 +139,8 @@ L(:,:,i) = D*diag([(t.^2+1).*(t.^2+1).*(sin(t).^2),...
                    (t.^2+1).*(t.^2+1).*(sin(7*t).^2),...
                    (t.^2+1).*(t.^2+1).*(sin(8*t).^2),...
                    (t.^2+1).*(t.^2+1).*(sin(9*t).^2)])*D';
-               LapPotx(i,1) = x(i,:)*L(:,:,i)*x(i,:)';
-                              LapPoty(i,1) = y(i,:)*L(:,:,i)*y(i,:)';
+LapPotx(i,1) = x(i,:)*L(:,:,i)*x(i,:)';
+LapPoty(i,1) = y(i,:)*L(:,:,i)*y(i,:)';
 
 end
    
@@ -160,17 +159,14 @@ figure(1)
 plot(x(:,1),y(:,1),'c')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
-hold on;
 plot(x(:,4),y(:,4) ,'b')
-hold on;
 plot(x(:,5),y(:,5),'m')
-hold on;
 plot(x(:,6),y(:,6),'k')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3','Agent 4','Agent 5','Agent 6')
+hold off;
 
 pause(15)
 
@@ -203,11 +199,11 @@ figure(1)
 plot(x(:,1),y(:,1),'k')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3')
+hold off;
 
 pause(15)
 
@@ -238,13 +234,12 @@ figure(1)
 plot(x(:,1),y(:,1),'b')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
-hold on;
 plot(x(:,4),y(:,4),'k')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3','Agent 4')
+hold off;
 
 pause(15)
 
@@ -261,11 +256,11 @@ figure(1)
 plot(x(:,1),y(:,1),'k')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3')
+hold off;
 subplot(2,1,1)
 plot(t,x)
 xlabel('time','fontweight','bold','fontsize',16);
@@ -309,17 +304,14 @@ figure(1)
 plot(x(:,1),y(:,1),'c')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
-hold on;
 plot(x(:,4),y(:,4) ,'b')
-hold on;
 plot(x(:,5),y(:,5),'m')
-hold on;
 plot(x(:,6),y(:,6),'k')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3','Agent 4','Agent 5','Agent 6')
+hold off;
 
 pause(15)
 
@@ -339,11 +331,11 @@ figure(1)
 plot(x(:,1),y(:,1),'k')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3')
+hold off;
 
 pause(15)
 
@@ -363,13 +355,12 @@ figure(1)
 plot(x(:,1),y(:,1),'b')
 hold on;
 plot(x(:,2),y(:,2),'g')
-hold on;
 plot(x(:,3),y(:,3),'r')
-hold on;
 plot(x(:,4),y(:,4),'k')
 xlabel('x-coordinates','fontweight','bold','fontsize',16);
 ylabel('y-coordinates','fontweight','bold','fontsize',16);
 legend('Agent 1','Agent 2','Agent 3','Agent 4')
+hold off;
 
 pause(15)
 
